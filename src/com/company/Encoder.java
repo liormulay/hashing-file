@@ -8,8 +8,8 @@ import java.util.List;
 import static com.company.Utils.*;
 
 public class Encoder {
-    public static final int KB_LENGTH = 1024;
 
+    public static final int KB_LENGTH = 1024;
 
     public ProtectedVersion encodeFile(File file) {
         byte[] bytes = readFileToBytes(file);
@@ -45,13 +45,12 @@ public class Encoder {
             Block prevBlock = encodedBlocks.get(0);
             byte[] hashValue = createHashing(prevBlock);
             Block block = new Block(dataBytes);
-            if (i > KB_LENGTH) {
-                block.setHashValue(hashValue);
-            } else {
-                protectedBytes.setH0(hashValue);
-            }
+            block.setHashValue(hashValue);
             encodedBlocks.add(0, block);
         }
+        Block firstBlock = encodedBlocks.get(0);
+        byte[] h0Bytes = createHashing(firstBlock);
+        protectedBytes.setH0(h0Bytes);
         protectedBytes.setBlocks(encodedBlocks);
         return protectedBytes;
     }
