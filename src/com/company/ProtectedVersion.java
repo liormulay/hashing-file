@@ -3,14 +3,22 @@ package com.company;
 import java.io.File;
 
 public class ProtectedVersion {
-    private byte[] h0;
+    private String h0;
     private File protectedFile;
 
-    public byte[] getH0() {
+    public ProtectedVersion() {
+    }
+
+    public ProtectedVersion(String h0, File protectedFile) {
+        this.h0 = h0;
+        this.protectedFile = protectedFile;
+    }
+
+    public String getH0() {
         return h0;
     }
 
-    public void setH0(byte[] h0) {
+    public void setH0(String h0) {
         this.h0 = h0;
     }
 
@@ -20,5 +28,13 @@ public class ProtectedVersion {
 
     public void setProtectedFile(File protectedFile) {
         this.protectedFile = protectedFile;
+    }
+
+    @Override
+    public String toString() {
+        return "ProtectedVersion{" +
+                "h0='" + h0 + '\'' +
+                ", protectedFile=" + protectedFile +
+                '}';
     }
 }
