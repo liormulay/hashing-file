@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.company.Utils.*;
+import static com.company.Utils.encodeHexString;
 
 public class Encoder {
 
@@ -19,7 +20,7 @@ public class Encoder {
 
     private ProtectedVersion protectedBytesToResponse(ProtectedBytes protectedBytes) {
         String hexH0 = encodeHexString(protectedBytes.getH0());
-        byte[] encodedBytes = protectedBytes.getH0();
+        byte[] encodedBytes = null;
         for (Block block : protectedBytes.getBlocks()) {
             encodedBytes = mergeArrays(encodedBytes, block.getDataBytes());
             encodedBytes = mergeArrays(encodedBytes, block.getHashValue());
@@ -60,17 +61,6 @@ public class Encoder {
         return sha(originalBytes);
     }
 
-
-    private byte[] readFileToBytes(File file) {
-        byte[] bytes = new byte[(int) file.length()];
-        try (FileInputStream fis = new FileInputStream(file)) {
-            //read file into bytes[]
-            fis.read(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bytes;
-    }
 
     private File createFile(byte[] bytes) {
         File file = new File("C:\\Users\\Stargo\\Downloads\\zeroEncoded.bin");

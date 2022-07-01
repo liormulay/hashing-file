@@ -3,6 +3,9 @@ package com.company;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -10,6 +13,9 @@ public class Utils {
     public static byte[] mergeArrays(@NotNull byte[] first, @Nullable byte[] second) {
         if (second == null) {
             return first;
+        }
+        if (first == null) {
+            return second;
         }
         int fal = first.length;        //determines length of firstArray
         int sal = second.length;   //determines length of secondArray
@@ -34,8 +40,8 @@ public class Utils {
 
     public static String encodeHexString(byte[] byteArray) {
         StringBuilder hexStringBuffer = new StringBuilder();
-        for (int i = 0; i < byteArray.length; i++) {
-            hexStringBuffer.append(byteToHex(byteArray[i]));
+        for (byte b : byteArray) {
+            hexStringBuffer.append(byteToHex(b));
         }
         return hexStringBuffer.toString();
     }
@@ -45,5 +51,16 @@ public class Utils {
         hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
         hexDigits[1] = Character.forDigit((num & 0xF), 16);
         return new String(hexDigits);
+    }
+
+    public static byte[] readFileToBytes(File file) {
+        byte[] bytes = new byte[(int) file.length()];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            //read file into bytes[]
+            fis.read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bytes;
     }
 }
