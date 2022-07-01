@@ -1,11 +1,17 @@
 package com.company;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import static com.company.Main.sha;
 
 public class Encoder {
     public static final int KB_LENGTH = 1024;
@@ -23,15 +29,40 @@ public class Encoder {
         int lastBlockSize = originalBytes.length - numOfIterations * KB_LENGTH;
 
         if (numOfIterations * KB_LENGTH == originalBytes.length) {
-            numOfIterations--;
             lastBlockSize = KB_LENGTH;
         }
-        System.out.println("lastBlockSize " + lastBlockSize);
         List<Block> encodedBlocks = new ArrayList<>();
-        byte[] lastBytes = Arrays.copyOfRange(originalBytes, originalBytes.length - lastBlockSize, originalBytes.length);
+        int lastBlockFromIndex = originalBytes.length - lastBlockSize;
+        byte[] lastBytes = Arrays.copyOfRange(originalBytes, lastBlockFromIndex, originalBytes.length);
         Block lastBlock = new Block(lastBytes);
         encodedBlocks.add(lastBlock);
+        for (int i = lastBlockFromIndex; i >= KB_LENGTH; i -= KB_LENGTH) {
+            byte[] dataBytes = Arrays.copyOfRange(originalBytes, i - KB_LENGTH, i);
+            Block prevBlock = encodedBlocks.get(0);
+            byte[] hashValue = createHashing(prevBlock);
+            Block block = new Block(dataBytes);
+            encodedBlocks.add(0, block);
+        }
         return null;
+    }
+
+    private byte[] createHashing(Block block) {
+        byte[] originalBytes = mergeArrays(block.getDataBytes(), block.getHashValue());
+        byte[] encodedHash=sha(originalBytes);
+        System.out.println("encodedHash.length "+encodedHash.length);
+        return null;
+    }
+
+    private byte[] mergeArrays(@NotNull byte[] first, @Nullable byte[] second) {
+        if (second == null) {
+            return first;
+        }
+        int fal = first.length;        //determines length of firstArray
+        int sal = second.length;   //determines length of secondArray
+        byte[] result = new byte[fal + sal];
+        System.arraycopy(first, 0, result, 0, fal);
+        System.arraycopy(second, 0, result, fal, sal);
+        return result;
     }
 
     private byte[] readFileToBytes(File file) {
