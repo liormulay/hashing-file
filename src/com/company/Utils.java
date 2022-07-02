@@ -1,6 +1,5 @@
 package com.company;
 
-import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
 import java.io.*;
@@ -8,7 +7,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utils {
-    public static byte[] mergeArrays(@NotNull byte[] first, @Nullable byte[] second) {
+    @Nullable
+    public static byte[] mergeArrays(@Nullable byte[] first, @Nullable byte[] second) {
         if (second == null) {
             return first;
         }
