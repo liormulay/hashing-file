@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.model.ProtectedVersion;
+
 import java.io.File;
 import java.util.Objects;
 

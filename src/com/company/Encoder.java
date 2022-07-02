@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.model.Block;
+import com.company.model.ProtectedBytes;
+import com.company.model.ProtectedVersion;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
