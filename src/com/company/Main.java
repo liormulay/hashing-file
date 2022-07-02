@@ -9,8 +9,10 @@ import static com.company.Utils.*;
 
 public class Main {
 
+    public static final String ORIGINAL_FILE_PATH = "C:\\Users\\Stargo\\Downloads\\zero.bin";
+
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\Stargo\\Downloads\\zero.bin");
+        File file = new File(ORIGINAL_FILE_PATH);
         Encoder encoder = new Encoder();
         ProtectedVersion protectedVersion = encoder.encodeFile(file);
 
