@@ -6,8 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.company.Encoder.KB_LENGTH;
-import static com.company.Utils.createHashing;
-import static com.company.Utils.readFileToBytes;
+import static com.company.Utils.*;
 
 public class Decoder {
     public static int SHA_LENGTH = 32;
@@ -20,7 +19,13 @@ public class Decoder {
         List<Block> blocks = parseFileToBlocks(protectedVersion.getProtectedFile());
         Block firstBlock = blocks.get(0);
         byte[] dataBytes = extractData(h0Bytes, firstBlock);
-        return null;
+        for (int i = 1; i < blocks.size(); i++) {
+            byte[] hashValue = blocks.get(i - 1).getHashValue();
+            Block block = blocks.get(i);
+            byte[] blockData = extractData(hashValue, block);
+            dataBytes = mergeArrays(dataBytes, blockData);
+        }
+        return createFile(dataBytes, "C:\\Users\\Stargo\\Downloads\\zeroDecoded.bin");
     }
 
     private byte[] extractData(byte[] hash, Block block) throws MismatchException {

@@ -25,7 +25,7 @@ public class Encoder {
             encodedBytes = mergeArrays(encodedBytes, block.getDataBytes());
             encodedBytes = mergeArrays(encodedBytes, block.getHashValue());
         }
-        File encodedFile = createFile(encodedBytes);
+        File encodedFile = createFile(encodedBytes, "C:\\Users\\Stargo\\Downloads\\zeroEncoded.bin");
         return new ProtectedVersion(hexH0, encodedFile);
     }
 
@@ -56,36 +56,4 @@ public class Encoder {
         return protectedBytes;
     }
 
-
-
-    private File createFile(byte[] bytes) {
-        File file = new File("C:\\Users\\Stargo\\Downloads\\zeroEncoded.bin");
-
-        // Try block to check for exceptions
-        try {
-
-            // Initialize a pointer in file
-            // using OutputStream
-            OutputStream os = new FileOutputStream(file);
-
-            // Starting writing the bytes in it
-            os.write(bytes);
-
-            // Display message onconsole for successful
-            // execution
-            System.out.println("Successfully"
-                    + " byte inserted");
-
-            // Close the file connections
-            os.close();
-        }
-
-        // Catch block to handle the exceptions
-        catch (Exception e) {
-
-            // Display exception on console
-            System.out.println("Exception: " + e);
-        }
-        return file;
-    }
 }

@@ -1,6 +1,9 @@
 package com.company;
 
 import java.io.File;
+import java.util.Objects;
+
+import static com.company.Utils.*;
 
 public class Main {
 
@@ -11,7 +14,11 @@ public class Main {
 
         Decoder decoder = new Decoder();
         try {
-            decoder.decodeFile(protectedVersion);
+            File decodedFile = decoder.decodeFile(protectedVersion);
+            byte[] fileBytes = readFileToBytes(decodedFile);
+            byte[] shaFile = sha(fileBytes);
+            String hashFile = encodeHexString(Objects.requireNonNull(shaFile));
+            System.out.println("Decoded file hash: " + hashFile);
         } catch (MismatchException e) {
             System.out.println(e.getMessage());
         }

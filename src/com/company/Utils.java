@@ -3,9 +3,7 @@ package com.company;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -67,5 +65,36 @@ public class Utils {
     public static byte[] createHashing(Block block) {
         byte[] originalBytes = mergeArrays(block.getDataBytes(), block.getHashValue());
         return sha(originalBytes);
+    }
+
+    public static File createFile(byte[] bytes, String path) {
+        File file = new File(path);
+
+        // Try block to check for exceptions
+        try {
+
+            // Initialize a pointer in file
+            // using OutputStream
+            OutputStream os = new FileOutputStream(file);
+
+            // Starting writing the bytes in it
+            os.write(bytes);
+
+            // Display message onconsole for successful
+            // execution
+            System.out.println("Successfully"
+                    + " byte inserted");
+
+            // Close the file connections
+            os.close();
+        }
+
+        // Catch block to handle the exceptions
+        catch (Exception e) {
+
+            // Display exception on console
+            System.out.println("Exception: " + e);
+        }
+        return file;
     }
 }
