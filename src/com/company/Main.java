@@ -2,8 +2,6 @@ package com.company;
 
 import java.io.File;
 
-import static com.company.Utils.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -12,7 +10,11 @@ public class Main {
         ProtectedVersion protectedVersion = encoder.encodeFile(file);
 
         Decoder decoder = new Decoder();
-        decoder.decodeFile(protectedVersion);
+        try {
+            decoder.decodeFile(protectedVersion);
+        } catch (MismatchException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 

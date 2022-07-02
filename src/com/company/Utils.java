@@ -63,4 +63,9 @@ public class Utils {
         }
         return bytes;
     }
+
+    public static byte[] createHashing(Block block) {
+        byte[] originalBytes = mergeArrays(block.getDataBytes(), block.getHashValue());
+        return sha(originalBytes);
+    }
 }

@@ -56,10 +56,6 @@ public class Encoder {
         return protectedBytes;
     }
 
-    private byte[] createHashing(Block block) {
-        byte[] originalBytes = mergeArrays(block.getDataBytes(), block.getHashValue());
-        return sha(originalBytes);
-    }
 
 
     private File createFile(byte[] bytes) {

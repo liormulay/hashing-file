@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.company.Encoder.KB_LENGTH;
+import static com.company.Utils.createHashing;
 import static com.company.Utils.readFileToBytes;
 
 public class Decoder {
@@ -13,11 +14,21 @@ public class Decoder {
 
     public static int ENCODED_BLOCK_LENGTH = KB_LENGTH + SHA_LENGTH;
 
-    public File decodeFile(ProtectedVersion protectedVersion) {
+    public File decodeFile(ProtectedVersion protectedVersion) throws MismatchException {
         String h0Hex = protectedVersion.getH0();
         byte[] h0Bytes = hexStringToByteArray(h0Hex);
         List<Block> blocks = parseFileToBlocks(protectedVersion.getProtectedFile());
+        Block firstBlock = blocks.get(0);
+        byte[] dataBytes = extractData(h0Bytes, firstBlock);
         return null;
+    }
+
+    private byte[] extractData(byte[] hash, Block block) throws MismatchException {
+        byte[] hashBlock = createHashing(block);
+        if (!Arrays.equals(hash, hashBlock)) {
+            throw new MismatchException("Hashes are mismatch");
+        }
+        return block.getDataBytes();
     }
 
     private List<Block> parseFileToBlocks(File file) {
