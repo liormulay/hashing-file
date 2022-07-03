@@ -2,9 +2,7 @@ package test;
 
 import com.company.Encoder;
 import com.company.model.ProtectedVersion;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -20,13 +18,6 @@ class EncoderTest {
 
     private static final String EXCEPTED_ENCODED_FILE_HASH = "3857d5a53a726b96fe0de7f1b7bd0239c56aae4a5f9b9a75428cff6f850aeb56";
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void validateEncodeFile() {

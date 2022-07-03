@@ -10,6 +10,8 @@ import static com.company.Utils.*;
 public class Main {
 
     public static final String ORIGINAL_FILE_PATH = "C:\\Users\\Stargo\\Downloads\\zero.bin";
+    public static final String ENCODED_FILE_PATH = "C:\\Users\\Stargo\\Downloads\\zeroEncoded.bin";
+    public static final String DECODED_FILE_PATH = "C:\\Users\\Stargo\\Downloads\\zeroDecoded.bin";
 
     public static void main(String[] args) {
         File file = new File(ORIGINAL_FILE_PATH);

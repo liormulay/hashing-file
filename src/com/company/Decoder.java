@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.company.Encoder.KB_LENGTH;
+import static com.company.Main.DECODED_FILE_PATH;
 import static com.company.Utils.*;
 
 public class Decoder {
@@ -28,7 +29,7 @@ public class Decoder {
             byte[] blockData = extractData(hashValue, block);
             dataBytes = mergeArrays(dataBytes, blockData);
         }
-        return createFile(dataBytes, "C:\\Users\\Stargo\\Downloads\\zeroDecoded.bin");
+        return createFile(dataBytes, DECODED_FILE_PATH);
     }
 
     private byte[] extractData(byte[] hash, Block block) throws MismatchException {

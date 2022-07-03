@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.company.Main.ENCODED_FILE_PATH;
 import static com.company.Utils.*;
 import static com.company.Utils.encodeHexString;
 
@@ -29,7 +30,7 @@ public class Encoder {
             encodedBytes = mergeArrays(encodedBytes, block.getDataBytes());
             encodedBytes = mergeArrays(encodedBytes, block.getHashValue());
         }
-        File encodedFile = createFile(encodedBytes, "C:\\Users\\Stargo\\Downloads\\zeroEncoded.bin");
+        File encodedFile = createFile(encodedBytes, ENCODED_FILE_PATH);
         return new ProtectedVersion(hexH0, encodedFile);
     }
 
