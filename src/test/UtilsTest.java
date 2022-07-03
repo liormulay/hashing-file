@@ -3,8 +3,7 @@ package test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.company.Utils.encodeHexString;
-import static com.company.Utils.mergeArrays;
+import static com.company.Utils.*;
 
 class UtilsTest {
 
@@ -22,9 +21,21 @@ class UtilsTest {
 
     @Test
     void encodeHexString_test() {
-        byte[] bytes = new byte[]{0,1,2,10,11,15};
+        byte[] bytes = new byte[]{0, 1, 10, 30};
         final String hexString = encodeHexString(bytes);
-        Assertions.assertEquals(hexString,"0001020a0b0f");
+        Assertions.assertEquals(hexString, "00010a1e");
+    }
+
+    @Test
+    void byteToHex_test() {
+        String hexString = byteToHex((byte) 3);
+        Assertions.assertEquals(hexString, "03");
+        hexString = byteToHex((byte) 10);
+        Assertions.assertEquals(hexString, "0a");
+        hexString = byteToHex((byte) 123);
+        Assertions.assertEquals(hexString, "7b");
+        hexString = byteToHex((byte) 255);
+        Assertions.assertEquals(hexString, "ff");
     }
 
     @Test
