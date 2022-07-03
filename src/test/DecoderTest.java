@@ -18,7 +18,7 @@ class DecoderTest {
     private final Decoder decoder = new Decoder();
 
     @Test
-    void decodeFile() {
+    void decodeFile_test() {
         String h0 = "e6e19106304b9665184e957d5dbf58ad36c55b52bf8d993dae4340c96bd8e81f";
         File encodedFile = new File(ENCODED_FILE_PATH);
         ProtectedVersion protectedVersion = new ProtectedVersion(h0, encodedFile);
@@ -34,7 +34,7 @@ class DecoderTest {
     }
 
     @Test
-    void decodeFile_fail() {
+    void decodeFile_testFail() {
         String h0 = "0000000000000000000000000000000000000000000000000000000000000000";
         File encodedFile = new File(ENCODED_FILE_PATH);
         ProtectedVersion protectedVersion = new ProtectedVersion(h0, encodedFile);
