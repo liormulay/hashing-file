@@ -3,6 +3,7 @@ package test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.company.Utils.encodeHexString;
 import static com.company.Utils.mergeArrays;
 
 class UtilsTest {
@@ -20,15 +21,10 @@ class UtilsTest {
     }
 
     @Test
-    void sha() {
-    }
-
-    @Test
-    void encodeHexString() {
-    }
-
-    @Test
-    void byteToHex() {
+    void encodeHexString_test() {
+        byte[] bytes = new byte[]{0,1,2,10,11,15};
+        final String hexString = encodeHexString(bytes);
+        Assertions.assertEquals(hexString,"0001020a0b0f");
     }
 
     @Test
