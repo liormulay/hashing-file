@@ -27,9 +27,25 @@ class DecoderTest {
             byte[] fileBytes = readFileToBytes(decodedFile);
             byte[] shaFile = sha(fileBytes);
             String hashFile = encodeHexString(Objects.requireNonNull(shaFile));
-            Assertions.assertEquals(hashFile,"95b532cc4381affdff0d956e12520a04129ed49d37e154228368fe5621f0b9a2");
+            Assertions.assertEquals(hashFile, "95b532cc4381affdff0d956e12520a04129ed49d37e154228368fe5621f0b9a2");
         } catch (MismatchException e) {
             fail("MismatchException, message: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void decodeFile_fail() {
+        String h0 = "0000000000000000000000000000000000000000000000000000000000000000";
+        File encodedFile = new File(ENCODED_FILE_PATH);
+        ProtectedVersion protectedVersion = new ProtectedVersion(h0, encodedFile);
+        boolean isThrowMismatchException = false;
+        try {
+            decoder.decodeFile(protectedVersion);
+        } catch (MismatchException ignored) {
+            isThrowMismatchException = true;
+        }
+        if (!isThrowMismatchException) {
+            fail("Need to throw MismatchException");
         }
     }
 
