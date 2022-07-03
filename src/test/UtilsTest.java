@@ -38,15 +38,4 @@ class UtilsTest {
         Assertions.assertEquals(hexString, "ff");
     }
 
-    @Test
-    void readFileToBytes() {
-    }
-
-    @Test
-    void createHashing() {
-    }
-
-    @Test
-    void createFile() {
-    }
 }
