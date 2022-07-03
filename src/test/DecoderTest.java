@@ -49,7 +49,4 @@ class DecoderTest {
         }
     }
 
-    @Test
-    void hexStringToByteArray() {
-    }
 }
