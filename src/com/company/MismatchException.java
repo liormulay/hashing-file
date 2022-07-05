@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * This exception will be thrown if the validation is failed
+ */
 public class MismatchException extends Exception {
 
     public MismatchException() {
