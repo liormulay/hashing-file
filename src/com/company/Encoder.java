@@ -29,6 +29,12 @@ public class Encoder {
         return protectedBytesToResponse(protectedBytes);
     }
 
+    /**
+     * Get list of blocks merge them and create file from it
+     * also get h0 represent by array of bytes and encode it to hex string
+     * @param protectedBytes contain list of block and h0 bytes
+     * @return encoded file and h0 hex string
+     */
     private ProtectedVersion protectedBytesToResponse(ProtectedBytes protectedBytes) {
         String hexH0 = encodeHexString(protectedBytes.getH0());
         byte[] encodedBytes = null;
@@ -41,7 +47,7 @@ public class Encoder {
     }
 
     /**
-     * This method get an array of bytes and encoded them <br>
+     * Get an array of bytes and encoded them <br>
      * the algorithm is going from the end of the array<br>
      * calculate the size of the last block build it and add it to the list <br><br>
      * Then it looping on the array from the prev block index and jump by block length <br>
