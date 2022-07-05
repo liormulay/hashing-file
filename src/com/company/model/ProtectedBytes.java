@@ -2,6 +2,9 @@ package com.company.model;
 
 import java.util.List;
 
+/**
+ * This class contain the h0 and list of encoded blocks
+ */
 public class ProtectedBytes {
     private byte[] h0;
     private List<Block> blocks;

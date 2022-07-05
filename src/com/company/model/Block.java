@@ -1,7 +1,13 @@
 package com.company.model;
 
 public class Block {
+    /**
+     * hold the original data
+     */
     private byte[] dataBytes;
+    /**
+     * hold the result of hash method
+     */
     private byte[] hashValue;
 
     public Block() {

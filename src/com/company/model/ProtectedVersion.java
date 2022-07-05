@@ -2,8 +2,17 @@ package com.company.model;
 
 import java.io.File;
 
+/**
+ * This class represent the encoder response
+ */
 public class ProtectedVersion {
+    /**
+     * hex string of h0
+     */
     private String h0;
+    /**
+     * The encoded file
+     */
     private File protectedFile;
 
     public ProtectedVersion() {
